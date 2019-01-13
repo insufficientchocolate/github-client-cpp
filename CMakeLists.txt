@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.2)
+set(CMAKE_CXX_STANDARD 14)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(HunterGate)
+
+HunterGate(
+    URL "https://github.com/ruslo/hunter/archive/v0.23.89.tar.gz"
+    SHA1 "a370290a8b32987755a36d64807bf8c7f5b61730"
+)
+
+project(github-client-cpp)
+
+hunter_add_package(Boost)
+hunter_add_package(nlohmann_json)
+find_package(Boost CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
+add_library(
+    "${CMAKE_PROJECT_NAME}"
+    include/github-client/client.hpp
+    client.cc
+    http_client.hpp
+    http_client.cc
+    uri.hpp
+    uri.cc
+    password_session.hpp
+    password_session.cc
+)
+
+target_link_libraries(
+    "${CMAKE_PROJECT_NAME}"
+    Boost::boost
+    nlohmann_json::nlohmann_json
+)
+
+target_include_directories(
+    "${CMAKE_PROJECT_NAME}"
+    PUBLIC
+    $<BUILD_INTERFACE: include>
+    $<INSTALL_INTERFACE: include>
+)
+
+include(clang_format)
+format("${CMAKE_PROJECT_NAME}")
