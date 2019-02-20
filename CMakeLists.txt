@@ -17,6 +17,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 add_library(
     "${CMAKE_PROJECT_NAME}"
     include/github-client/client.hpp
+    include/github-client/json_http_client.hpp
     client.cc
     http_client.hpp
     http_client.cc

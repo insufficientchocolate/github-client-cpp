@@ -2,13 +2,13 @@
 #define _GITHUB_CLIENT_CPP_HTTP_CLIENT_H_
 
 #include <boost/asio.hpp>
-#include <github-client/session.hpp>
+#include <github-client/json_http_client.hpp>
 #include <nlohmann/json.hpp>
 #include <string>
 
 namespace GithubClient {
 namespace net = boost::asio::ip;
-class HttpClient : public Session {
+class HttpClient : public JsonHttpClient {
  public:
   HttpClient(boost::asio::io_context& io, const std::string& base);
   virtual nlohmann::json get(const std::string& path) const override;
