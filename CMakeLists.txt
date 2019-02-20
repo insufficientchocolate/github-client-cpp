@@ -12,12 +12,20 @@ project(github-client-cpp)
 
 hunter_add_package(Boost)
 hunter_add_package(nlohmann_json)
+hunter_add_package(GTest)
+
 find_package(Boost CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
+
+
+
 add_library(
     "${CMAKE_PROJECT_NAME}"
     include/github-client/client.hpp
     include/github-client/json_http_client.hpp
+    include/github-client/errors/illegal_uri_exception.hpp
+    errors/illegal_uri_exception.cc
     client.cc
     http_client.hpp
     http_client.cc
@@ -37,8 +45,14 @@ target_include_directories(
     "${CMAKE_PROJECT_NAME}"
     PUBLIC
     $<BUILD_INTERFACE: include>
+    $<BUILD_INTERFACE: ${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE: include>
 )
 
 include(clang_format)
 format("${CMAKE_PROJECT_NAME}")
+
+enable_testing()
+include(GoogleTest)
+
+add_subdirectory(tests)

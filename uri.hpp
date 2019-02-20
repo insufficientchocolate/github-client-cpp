@@ -3,6 +3,7 @@
 #include <string>
 namespace GithubClient {
 class URI {
+ public:
   static const std::string getHost(const std::string& input);
 };
 };  // namespace GithubClient
