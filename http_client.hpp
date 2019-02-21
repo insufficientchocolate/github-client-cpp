@@ -10,6 +10,8 @@ namespace GithubClient {
 namespace net = boost::asio::ip;
 class HttpClient : public JsonHttpClient {
  public:
+  typedef net::basic_resolver_results<net::tcp>::const_iterator
+      EndpointResolveResult;
   HttpClient(boost::asio::io_context& io, const std::string& base);
   virtual nlohmann::json get(const std::string& path) const override;
   virtual nlohmann::json post(const std::string& path,
@@ -18,7 +20,7 @@ class HttpClient : public JsonHttpClient {
  private:
   void resolveEndpoint(const std::string& host, const unsigned int port);
   const std::string pathBase_;
-  std::vector<net::basic_resolver_entry<net::tcp>> endpoints_;
+  EndpointResolveResult endpoints_;
   boost::asio::io_context& io_;
 };
 };  // namespace GithubClient

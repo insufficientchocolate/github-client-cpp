@@ -18,8 +18,6 @@ void HttpClient::resolveEndpoint(const std::string& host,
                                  const unsigned int port) {
   tcp::resolver resolver{io_};
   auto const results = resolver.resolve(host, std::to_string(port));
-  for (auto it = results.begin(); it != results.end(); it++) {
-    endpoints_.push_back(*it);
-  }
+  endpoints_ = results.begin();
 }
 };  // namespace GithubClient
