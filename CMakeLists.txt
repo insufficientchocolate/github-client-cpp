@@ -33,6 +33,7 @@ add_library(
     uri.cc
     password_session.hpp
     password_session.cc
+    cert.hpp
 )
 
 target_link_libraries(
