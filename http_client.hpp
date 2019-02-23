@@ -3,6 +3,7 @@
 
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <boost/beast.hpp>
 #include <github-client/json_http_client.hpp>
 #include <nlohmann/json.hpp>
 #include <string>
@@ -10,10 +11,14 @@
 namespace GithubClient {
 namespace net = boost::asio::ip;
 namespace ssl = boost::asio::ssl;
+namespace http = boost::beast::http;
+typedef http::request<http::string_body> Request;
+typedef http::response<http::string_body> Response;
 class HttpClient : public JsonHttpClient {
  public:
   typedef net::basic_resolver_results<net::tcp>::const_iterator
       EndpointResolveResult;
+
   HttpClient(boost::asio::io_context& io, const std::string& base);
   virtual nlohmann::json get(const std::string& path) const override;
   virtual nlohmann::json post(const std::string& path,

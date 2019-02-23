@@ -4,8 +4,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(HunterGate)
 
 HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.23.89.tar.gz"
-    SHA1 "a370290a8b32987755a36d64807bf8c7f5b61730"
+  URL "https://github.com/ruslo/hunter/archive/v0.23.89.tar.gz"
+  SHA1 "a370290a8b32987755a36d64807bf8c7f5b61730"
 )
 
 project(github-client-cpp)
@@ -21,19 +21,21 @@ find_package(GTest CONFIG REQUIRED)
 
 
 add_library(
-    "${CMAKE_PROJECT_NAME}"
-    include/github-client/client.hpp
-    include/github-client/json_http_client.hpp
-    include/github-client/errors/illegal_uri_exception.hpp
-    errors/illegal_uri_exception.cc
-    client.cc
-    http_client.hpp
-    http_client.cc
-    uri.hpp
-    uri.cc
-    password_session.hpp
-    password_session.cc
-    cert.hpp
+  "${CMAKE_PROJECT_NAME}"
+  include/github-client/client.hpp
+  include/github-client/json_http_client.hpp
+  include/github-client/errors/illegal_uri_exception.hpp
+  errors/illegal_uri_exception.cc
+  client.cc
+  http_client.hpp
+  http_client.cc
+  uri.hpp
+  uri.cc
+  password_session.hpp
+  password_session.cc
+  cert.hpp
+  connection.hpp
+  connection.cc
 )
 
 target_link_libraries(
@@ -43,11 +45,11 @@ target_link_libraries(
 )
 
 target_include_directories(
-    "${CMAKE_PROJECT_NAME}"
-    PUBLIC
-    $<BUILD_INTERFACE: include>
-    $<BUILD_INTERFACE: ${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE: include>
+  "${CMAKE_PROJECT_NAME}"
+  PUBLIC
+  $<BUILD_INTERFACE: include>
+  $<BUILD_INTERFACE: ${CMAKE_CURRENT_SOURCE_DIR}>
+  $<INSTALL_INTERFACE: include>
 )
 
 include(clang_format)
