@@ -21,6 +21,6 @@ TEST(URI, InferDefaultPort) {
 TEST(URI, PathConcat) {
   GithubClient::URI uri("https://github.com/api");
   uri / "resource";
-  ASSERT_EQ("https://github.com/api/resource", uri.to_string());
+  ASSERT_EQ("https://github.com/api/resource", uri.str());
 }
 };  // namespace

@@ -18,7 +18,7 @@ static std::string inferPortByScheme(const std::string& scheme) {
 
   return "";
 }
-URI::URI(const std::string& uri) : boost::string_view(uri) {
+URI::URI(const std::string& uri) {
   std::regex uriRegexp(kUriPattern);
   std::smatch m;
   if (!std::regex_search(uri, m, uriRegexp)) {
@@ -59,9 +59,16 @@ URI& URI::operator/(const boost::string_view& path) {
   return *this;
 }
 
-// URI& URI::operator/(const std::string& path) {
-//   this-><< (path);
-//   return *this;
-// }
+std::string URI::str() const {
+  std::stringstream ss;
+  ss << getScheme() << "://" << getHost();
+  if (!isDefaultPort_) {
+    ss << ":" << getPort();
+  }
+  if (!path_.empty()) {
+    ss << "/" << getPath();
+  }
+  return ss.str();
+}
 
 };  // namespace GithubClient

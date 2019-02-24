@@ -4,7 +4,7 @@
 #include <string>
 
 namespace GithubClient {
-class URI : public boost::string_view {
+class URI {
  public:
   // static const std::string getHost(const std::string& input);
   URI(const std::string& uri);
@@ -13,6 +13,8 @@ class URI : public boost::string_view {
   std::string getPort() const;
   std::string getPath() const;
   std::string getScheme() const;
+  std::string str() const;
+
   URI& operator/(const boost::string_view& path);
 
  private:
