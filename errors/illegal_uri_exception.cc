@@ -3,6 +3,6 @@
 namespace GithubClient {
 namespace Errors {
 IllegalURIException::IllegalURIException(const std::string& input)
-    : std::runtime_error(input) {}
+    : std::runtime_error("IllegalURIException: " + input) {}
 };  // namespace Errors
 };  // namespace GithubClient

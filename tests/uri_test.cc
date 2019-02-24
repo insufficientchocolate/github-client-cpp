@@ -3,7 +3,7 @@
 
 namespace {
 TEST(URI, getHost) {
-  ASSERT_EQ("github.com",
-            GithubClient::URI::getHost("https://github.com/path"));
+  GithubClient::URI uri("https://github.com/path");
+  ASSERT_EQ("github.com", uri.getHost());
 }
 };  // namespace
