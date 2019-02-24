@@ -1,7 +1,7 @@
 #include "connection.hpp"
 
 namespace GithubClient {
-Connection::Connection(boost::asio::io_context& io, ssl::context sslContext,
+Connection::Connection(boost::asio::io_context& io, ssl::context& sslContext,
                        const std::string& host, const std::string& port) {
   connect(sslContext, host, port);
 };

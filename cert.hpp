@@ -1,6 +1,6 @@
 #ifndef _GITHUB_CLIENT_CPP_HTTP_CLIENT_HPP_
 #define _GITHUB_CLIENT_CPP_HTTP_CLIENT_HPP_
-#include <boost/asio.hpp>
+#include <boost/asio/ssl.hpp>
 
 namespace ssl = boost::asio::ssl;
 

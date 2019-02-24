@@ -7,13 +7,11 @@ class PasswordSession : public JsonHttpClient {
  public:
   PasswordSession(const std::string& username, const std::string& password)
       : username_(username), password_(password) {}
-  nlohmann::json get(const std::string& path) const;
-  nlohmann::json get(const std::string& path,
-                     JsonHttpClient::Headers headers) const;
-  nlohmann::json post(const std::string& path,
-                      const nlohmann::json& body) const;
+  nlohmann::json get(const std::string& path);
+  nlohmann::json get(const std::string& path, JsonHttpClient::Headers headers);
+  nlohmann::json post(const std::string& path, const nlohmann::json& body);
   nlohmann::json post(const std::string& path, const nlohmann::json& body,
-                      JsonHttpClient::Headers headers) const;
+                      JsonHttpClient::Headers headers);
 
  private:
   const std::string username_;

@@ -12,7 +12,7 @@ namespace ssl = boost::asio::ssl;
 namespace GithubClient {
 class Connection {
  public:
-  Connection(boost::asio::io_context& io, ssl::context sslContext,
+  Connection(boost::asio::io_context& io, ssl::context& sslContext,
              const std::string& host, const std::string& port);
   Response doRequest(Request& request);
 

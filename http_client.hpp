@@ -16,20 +16,19 @@ typedef http::request<http::string_body> Request;
 typedef http::response<http::string_body> Response;
 class HttpClient : public JsonHttpClient {
  public:
-  typedef net::basic_resolver_results<net::tcp>::const_iterator
-      EndpointResolveResult;
-
   HttpClient(boost::asio::io_context& io, const std::string& base);
-  virtual nlohmann::json get(const std::string& path) const override;
+  HttpClient(boost::asio::io_context& io, const std::string& host,
+             const std::string& port, const std::string);
+  virtual nlohmann::json get(const std::string& path) override;
   virtual nlohmann::json post(const std::string& path,
-                              const nlohmann::json& body) const override;
+                              const nlohmann::json& body) override;
 
  private:
-  void resolveEndpoint(const std::string& host, const unsigned int port);
   const std::string pathBase_;
-  EndpointResolveResult endpoints_;
   boost::asio::io_context& io_;
   ssl::context sslContext_;
+  std::string host_;
+  std::string port_;
 };
 };  // namespace GithubClient
 
