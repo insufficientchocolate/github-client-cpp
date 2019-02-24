@@ -6,7 +6,11 @@
 namespace GithubClient {
 std::unique_ptr<Client> Client::login(const std::string& username,
                                       const std::string& password) {
-  return std::make_unique<Client>(PasswordSession(username, password));
+  boost::asio::io_context io;
+  std::thread t([&io] { io.run(); });
+  // FIXME: implement library init and thread pool
+  t.detach();
+  return std::make_unique<Client>(PasswordSession(io, username, password));
 }
 
 std::unique_ptr<Client> Client::oauth(const std::string& oauthToken) {

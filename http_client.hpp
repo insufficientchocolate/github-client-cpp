@@ -8,6 +8,8 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
+#include "uri.hpp"
+
 namespace GithubClient {
 namespace net = boost::asio::ip;
 namespace ssl = boost::asio::ssl;
@@ -19,12 +21,14 @@ class HttpClient : public JsonHttpClient {
   HttpClient(boost::asio::io_context& io, const std::string& base);
   HttpClient(boost::asio::io_context& io, const std::string& host,
              const std::string& port, const std::string);
-  virtual nlohmann::json get(const std::string& path) override;
+  virtual nlohmann::json get(const std::string& path,
+                             const Headers& headers) override;
   virtual nlohmann::json post(const std::string& path,
-                              const nlohmann::json& body) override;
+                              const nlohmann::json& body,
+                              const Headers& headers) override;
 
  private:
-  const std::string pathBase_;
+  const URI base_;
   boost::asio::io_context& io_;
   ssl::context sslContext_;
   std::string host_;
