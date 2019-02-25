@@ -36,6 +36,8 @@ add_library(
   cert.hpp
   connection.hpp
   connection.cc
+  base64.hpp
+  base64.cc
 )
 
 target_link_libraries(
