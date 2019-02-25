@@ -13,17 +13,26 @@ std::string Base64::encode(std::string input) {
   std::stringstream ss;
   const char* data = input.data();
   size_t s = input.size();
-  for (int i = 0; i <= s; i++) {
-    char thisShift = ((i + 1) % 3) * 2;
-    char lastShift = 8 - thisShift;
+  char left = 8;
+  for (size_t i = 0; i < s; i++) {
     char value = 0;
-    if (i > 0) {
-      value += data[i - 1] & !(255 << lastShift);
+    // accumlate at least 6 bit
+    if (left < 6) {
+      left += 8;
+      continue;
     }
-    value += data[i] >> thisShift;
-    ss << characters[value];
-    if (thisShift == 6) {
-      ss << characters[data[i] >> 2];
+    // have at least 6 bit
+    while (left >= 6) {
+      char value = 0;
+      if (left > 8) {
+        char use = left - 8;
+        value = data[i - 1] & !(255 << use);
+        left -= use;
+      }
+      char use = 8 - left;
+      value += data[i] >> use;
+      ss << characters[value];
+      left -= use;
     }
   }
   return ss.str();
