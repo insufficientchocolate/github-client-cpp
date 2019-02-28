@@ -61,3 +61,9 @@ enable_testing()
 include(GoogleTest)
 
 add_subdirectory(tests)
+
+include(GNUInstallDirs)
+
+install(TARGETS "${PROJECT_NAME}"
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+
