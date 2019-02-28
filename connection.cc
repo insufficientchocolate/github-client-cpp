@@ -10,7 +10,7 @@ void Connection::connect(ssl::context& sslContext, const std::string& host,
                          const std::string& port) {
   ip::tcp::resolver resolver{io_};
   auto const results = resolver.resolve(host, port);
-  stream_ = std::make_unique<ssl::stream<ip::tcp::socket>>(io_, sslContext);
+  stream_ = boost::make_unique<ssl::stream<ip::tcp::socket>>(io_, sslContext);
   // tcp connect
   boost::asio::connect(stream_->next_layer(), results.begin(), results.end());
   // ssl handshake
