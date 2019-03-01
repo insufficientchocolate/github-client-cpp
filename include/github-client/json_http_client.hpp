@@ -12,6 +12,7 @@ class JsonHttpClient {
   virtual nlohmann::json post(const std::string& path,
                               const nlohmann::json& body,
                               const Headers& headers = Headers{}) = 0;
+  virtual ~JsonHttpClient() = default;
 };
 };  // namespace GithubClient
 #endif

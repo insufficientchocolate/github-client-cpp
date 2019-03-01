@@ -39,6 +39,8 @@ add_library(
   connection.cc
   base64.hpp
   base64.cc
+  asio_thread_pool.cc
+  asio_thread_pool.hpp
 )
 
 target_link_libraries(

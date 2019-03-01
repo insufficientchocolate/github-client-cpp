@@ -1,22 +1,22 @@
 #ifndef _GITHUB_CLIENT_CPP_PASSWORD_SESSION_H_
 #define _GITHUB_CLIENT_CPP_PASSWORD_SESSION_H_
 #include <github-client/json_http_client.hpp>
-#include "http_client.hpp"
 
 namespace GithubClient {
-class PasswordSession : public HttpClient {
+class PasswordSession : public JsonHttpClient {
  public:
-  PasswordSession(boost::asio::io_context& io, const std::string& username,
-                  const std::string& password);
-  virtual nlohmann::json get(const std::string& path,
-                             const Headers& headers) override;
+  PasswordSession(std::unique_ptr<JsonHttpClient> client,
+                  const std::string& username, const std::string& password);
+  virtual nlohmann::json get(const std::string& path, const Headers& headers);
   virtual nlohmann::json post(const std::string& path,
                               const nlohmann::json& body,
-                              const Headers& headers) override;
+                              const Headers& headers);
 
  private:
+  std::unique_ptr<JsonHttpClient> client_;
   const std::string username_;
   const std::string password_;
+  Headers withAuth(Headers headers) const;
 };
 };  // namespace GithubClient
 #endif

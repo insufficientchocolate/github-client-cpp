@@ -6,14 +6,20 @@
 
 namespace GithubClient {
 class Client {
+  typedef std::function<std::unique_ptr<JsonHttpClient>(
+      boost::asio::io_context&)>
+      AsioBasedClientFactory;
+
  public:
   static std::unique_ptr<Client> login(const std::string& username,
                                        const std::string& password);
   static std::unique_ptr<Client> oauth(const std::string& oauthToken);
-  Client(const JsonHttpClient&& session);
+  Client(JsonHttpClient* client);
+  Client(AsioBasedClientFactory factory);
 
  private:
-  std::unique_ptr<JsonHttpClient> session_;
+  struct Impl;
+  std::unique_ptr<Impl> impl_;
 };
 };  // namespace GithubClient
 #endif
