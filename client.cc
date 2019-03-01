@@ -22,13 +22,6 @@ struct Client::Impl {
 };
 std::unique_ptr<Client> Client::login(const std::string& username,
                                       const std::string& password) {
-  // HttpClient client(j->impl_->pool->getService(), "github.com","443");
-  // return
-  // boost::make_unique<Client>(PasswordSession([](boost::asio::io_context& io)
-  // {
-  //   return std::unique_ptr<JsonHttpClient>(new HttpClient(io, "github.com",
-  //   "443", "api"));
-  // }, username, password));
   return boost::make_unique<Client>(
       [&username, &password](boost::asio::io_context& io) {
         return boost::make_unique<PasswordSession>(
