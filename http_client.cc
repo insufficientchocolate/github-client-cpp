@@ -13,6 +13,14 @@ HttpClient::HttpClient(boost::asio::io_context& io, const std::string& base)
   loadRootCertificates(sslContext_);
 }
 
+HttpClient::HttpClient(boost::asio::io_context& io, const std::string& host,
+                       const std::string& port, const std::string& path)
+    : io_(io),
+      base_("https", host, port, path),
+      sslContext_(ssl::context::method::tlsv11_client) {
+  loadRootCertificates(sslContext_);
+}
+
 nlohmann::json HttpClient::get(const std::string& path,
                                const Headers& headers) {
   Connection connection(io_, sslContext_, host_, port_);

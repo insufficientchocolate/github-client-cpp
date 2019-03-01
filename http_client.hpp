@@ -20,7 +20,7 @@ class HttpClient : public JsonHttpClient {
  public:
   HttpClient(boost::asio::io_context& io, const std::string& base);
   HttpClient(boost::asio::io_context& io, const std::string& host,
-             const std::string& port, const std::string);
+             const std::string& port, const std::string& path);
   virtual nlohmann::json get(const std::string& path,
                              const Headers& headers) override;
   virtual nlohmann::json post(const std::string& path,

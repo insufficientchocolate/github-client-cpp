@@ -37,12 +37,9 @@ URI::URI(const std::string& uri) {
   path_ = m[4];
 }
 
-URI::URI(const URI& origin)
-    : scheme_(origin.getScheme()),
-      host_(origin.getHost()),
-      port_(origin.getPort()),
-      path_(origin.getPath()),
-      isDefaultPort_(origin.isDefaultPort_) {}
+URI::URI(const std::string& scheme, const std::string& host,
+         const std::string& port, const std::string& path)
+    : scheme_(scheme), host_(host), port_(port), path_(path) {}
 
 std::string URI::getHost() const { return host_; }
 

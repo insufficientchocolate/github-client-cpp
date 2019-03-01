@@ -6,9 +6,9 @@
 namespace GithubClient {
 class URI {
  public:
-  // static const std::string getHost(const std::string& input);
   URI(const std::string& uri);
-  URI(const URI& uri);
+  URI(const std::string& scheme, const std::string& host,
+      const std::string& port, const std::string& path);
   std::string getHost() const;
   std::string getPort() const;
   std::string getPath() const;
