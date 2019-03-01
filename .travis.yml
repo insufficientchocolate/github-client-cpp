@@ -79,3 +79,7 @@ script:
     --install
     --clear
     --test
+
+cache:
+  directories:
+  - $HOME/.hunter
