@@ -22,17 +22,18 @@ class HttpClient : public JsonHttpClient {
   HttpClient(boost::asio::io_context& io, const std::string& host,
              const std::string& port, const std::string& path);
   virtual nlohmann::json get(const std::string& path,
-                             const Headers& headers) override;
+                             const Headers& headers = Headers()) override;
   virtual nlohmann::json post(const std::string& path,
                               const nlohmann::json& body,
-                              const Headers& headers) override;
+                              const Headers& headers = Headers()) override;
 
  private:
+  Request newRequest(http::verb const method, const boost::string_view& target,
+                     const boost::string_view& body,
+                     const Headers& headers) const;
   const URI base_;
   boost::asio::io_context& io_;
   ssl::context sslContext_;
-  std::string host_;
-  std::string port_;
 };
 };  // namespace GithubClient
 

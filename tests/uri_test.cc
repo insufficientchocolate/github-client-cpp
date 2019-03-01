@@ -23,4 +23,15 @@ TEST(URI, PathConcat) {
   uri / "resource";
   ASSERT_EQ("https://github.com/api/resource", uri.str());
 }
+
+TEST(URI, ParsingURLWithoutPath) {
+  try {
+    GithubClient::URI uri("https://github.com");
+    ASSERT_EQ("https", uri.getScheme());
+    ASSERT_EQ("github.com", uri.getHost());
+    ASSERT_EQ("", uri.getPath());
+  } catch (const std::exception& e) {
+    FAIL() << "exception threw: " << e.what();
+  }
+}
 };  // namespace

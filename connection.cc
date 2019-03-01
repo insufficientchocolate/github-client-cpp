@@ -24,9 +24,9 @@ Response Connection::doRequest(Request& request) {
   http::read(*stream_, buffer, response);
   boost::system::error_code ec;
   stream_->shutdown(ec);
-  // if (ec == boost::asio::ip::error::eof()) {
-  //   ec = {};
-  // }
+  if (ec == boost::asio::error::eof) {
+    ec = {};
+  }
   if (ec) {
     throw boost::beast::system_error(ec);
   }

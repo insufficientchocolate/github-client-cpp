@@ -5,7 +5,8 @@
 #include "uri.hpp"
 
 static const std::string kUriPattern =
-    "^([a-z]+):\\/\\/([A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)+)(?:\\:([0-9]+))?\\/(.*)";
+    "^([a-z]+):\\/\\/([A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)+)(?:\\:([0-9]+))?(?:\\/"
+    "(.*))?";
 
 namespace GithubClient {
 static std::string inferPortByScheme(const std::string& scheme) {

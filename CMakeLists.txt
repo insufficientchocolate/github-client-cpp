@@ -18,6 +18,7 @@ hunter_add_package(GTest)
 find_package(Boost CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 
 
@@ -47,6 +48,7 @@ target_link_libraries(
     "${CMAKE_PROJECT_NAME}"
     Boost::boost
     nlohmann_json::nlohmann_json
+    OpenSSL::SSL
 )
 
 target_include_directories(
@@ -70,3 +72,4 @@ include(GNUInstallDirs)
 install(TARGETS "${PROJECT_NAME}"
   ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
+add_subdirectory(integration_tests)
