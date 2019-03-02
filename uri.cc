@@ -1,8 +1,8 @@
+#include <github-client/uri.hpp>
 #include <github-client/errors/illegal_uri_exception.hpp>
 #include <regex>
 #include <sstream>
 
-#include "uri.hpp"
 
 static const std::string kUriPattern =
     "^([a-z]+):\\/\\/([A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)+)(?:\\:([0-9]+))?(?:\\/"

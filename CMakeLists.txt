@@ -26,12 +26,12 @@ add_library(
   "${CMAKE_PROJECT_NAME}"
   include/github-client/client.hpp
   include/github-client/json_http_client.hpp
+  include/github-client/uri.hpp
   include/github-client/errors/illegal_uri_exception.hpp
   errors/illegal_uri_exception.cc
   client.cc
   http_client.hpp
   http_client.cc
-  uri.hpp
   uri.cc
   password_session.hpp
   password_session.cc
