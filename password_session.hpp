@@ -7,9 +7,8 @@ class PasswordSession : public JsonHttpClient {
  public:
   PasswordSession(std::unique_ptr<JsonHttpClient> client,
                   const std::string& username, const std::string& password);
-  virtual nlohmann::json get(const std::string& path, const Headers& headers);
-  virtual nlohmann::json post(const std::string& path,
-                              const nlohmann::json& body,
+  virtual nlohmann::json get(const URI& uri, const Headers& headers);
+  virtual nlohmann::json post(const URI& uri, const nlohmann::json& body,
                               const Headers& headers);
 
  private:

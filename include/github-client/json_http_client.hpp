@@ -3,14 +3,15 @@
 #include <boost/beast.hpp>
 #include <map>
 #include <nlohmann/json.hpp>
+#include "uri.hpp"
+
 namespace GithubClient {
-typedef boost::beast::http::request_header<boost::beast::http::fields> Headers;
+typedef std::map<std::string, std::string> Headers;
 class JsonHttpClient {
  public:
-  virtual nlohmann::json get(const std::string& path,
+  virtual nlohmann::json get(const URI& uri,
                              const Headers& headers = Headers()) = 0;
-  virtual nlohmann::json post(const std::string& path,
-                              const nlohmann::json& body,
+  virtual nlohmann::json post(const URI& uri, const nlohmann::json& body,
                               const Headers& headers = Headers()) = 0;
   virtual ~JsonHttpClient() = default;
 };

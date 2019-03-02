@@ -25,8 +25,7 @@ std::unique_ptr<Client> Client::login(const std::string& username,
   return boost::make_unique<Client>(
       [&username, &password](boost::asio::io_context& io) {
         return boost::make_unique<PasswordSession>(
-            boost::make_unique<HttpClient>(io, "github.com", "443", "api"),
-            username, password);
+            boost::make_unique<HttpClient>(io), username, password);
       });
 }
 
