@@ -1,5 +1,5 @@
-#include "uri.hpp"
 #include <gtest/gtest.h>
+#include <github-client/uri.hpp>
 
 namespace {
 TEST(URI, Parsing) {
@@ -20,14 +20,13 @@ TEST(URI, InferDefaultPort) {
 
 TEST(URI, PathConcat) {
   GithubClient::URI uri("https://github.com/api");
-  uri / "resource";
-  ASSERT_EQ("https://github.com/api/resource", uri.str());
+  ASSERT_EQ("https://github.com/api/resource", (uri / "resource").str());
 }
 
 TEST(URI, PathConcatEmptyPath) {
   GithubClient::URI uri("https://api.github.com");
   ASSERT_EQ("https://api.github.com", uri.str());
-  ASSERT_EQ("https://api.github.com", (GithubClient::URI(uri) / "").str());
+  ASSERT_EQ("https://api.github.com", (uri / "").str());
 }
 
 TEST(URI, ParsingURLWithoutPath) {

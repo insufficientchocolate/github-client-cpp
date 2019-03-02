@@ -1,8 +1,7 @@
-#include <github-client/uri.hpp>
 #include <github-client/errors/illegal_uri_exception.hpp>
+#include <github-client/uri.hpp>
 #include <regex>
 #include <sstream>
-
 
 static const std::string kUriPattern =
     "^([a-z]+):\\/\\/([A-Za-z0-9]+(?:\\.[A-Za-z0-9]+)+)(?:\\:([0-9]+))?(?:\\/"
@@ -50,14 +49,15 @@ std::string URI::getPath() const { return path_; }
 
 std::string URI::getScheme() const { return scheme_; }
 
-URI& URI::operator/(const boost::string_view& path) {
+URI operator/(URI& parent, const boost::string_view& path) {
   if (path.empty()) {
-    return *this;
+    return parent;
   }
+  URI child = parent;
   std::stringstream ss;
-  ss << this->path_ << "/" << path;
-  this->path_ = ss.str();
-  return *this;
+  ss << parent.path_ << "/" << path;
+  child.path_ = ss.str();
+  return child;
 }
 
 std::string URI::str() const {

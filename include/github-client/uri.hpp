@@ -15,14 +15,15 @@ class URI {
   std::string getScheme() const;
   std::string str() const;
 
-  URI& operator/(const boost::string_view& path);
-
  private:
   std::string host_;
   std::string port_;
   std::string path_;
   std::string scheme_;
   bool isDefaultPort_;
+  friend URI operator/(URI&, const boost::string_view&);
 };
+URI operator/(URI& parent, const boost::string_view& segment);
+
 };  // namespace GithubClient
 #endif
