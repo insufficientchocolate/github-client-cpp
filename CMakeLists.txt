@@ -6,6 +6,7 @@ include(HunterGate)
 HunterGate(
   URL "https://github.com/ruslo/hunter/archive/v0.23.89.tar.gz"
   SHA1 "a370290a8b32987755a36d64807bf8c7f5b61730"
+  LOCAL
 )
 
 project(github-client-cpp)
@@ -14,6 +15,7 @@ hunter_add_package(OpenSSL)
 hunter_add_package(Boost)
 hunter_add_package(nlohmann_json)
 hunter_add_package(GTest)
+hunter_add_package(graphqlparser)
 
 find_package(Boost CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
