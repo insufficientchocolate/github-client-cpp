@@ -1,0 +1,3 @@
+[submodule "lib/libgraphqlparser"]
+	path = lib/libgraphqlparser
+	url = git@github.com:insufficientchocolate/libgraphqlparser.git
