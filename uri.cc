@@ -51,6 +51,9 @@ std::string URI::getPath() const { return path_; }
 std::string URI::getScheme() const { return scheme_; }
 
 URI& URI::operator/(const boost::string_view& path) {
+  if (path.empty()) {
+    return *this;
+  }
   std::stringstream ss;
   ss << this->path_ << "/" << path;
   this->path_ = ss.str();

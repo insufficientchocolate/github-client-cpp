@@ -24,6 +24,12 @@ TEST(URI, PathConcat) {
   ASSERT_EQ("https://github.com/api/resource", uri.str());
 }
 
+TEST(URI, PathConcatEmptyPath) {
+  GithubClient::URI uri("https://api.github.com");
+  ASSERT_EQ("https://api.github.com", uri.str());
+  ASSERT_EQ("https://api.github.com", (GithubClient::URI(uri) / "").str());
+}
+
 TEST(URI, ParsingURLWithoutPath) {
   try {
     GithubClient::URI uri("https://github.com");
@@ -34,4 +40,5 @@ TEST(URI, ParsingURLWithoutPath) {
     FAIL() << "exception threw: " << e.what();
   }
 }
+
 };  // namespace
