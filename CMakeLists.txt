@@ -28,6 +28,7 @@ add_library(
   include/github-client/json_http_client.hpp
   include/github-client/uri.hpp
   include/github-client/errors/illegal_uri_exception.hpp
+  include/github-client/follower.hpp
   errors/illegal_uri_exception.cc
   client.cc
   http_client.hpp
@@ -42,6 +43,7 @@ add_library(
   base64.cc
   asio_thread_pool.cc
   asio_thread_pool.hpp
+  follower_ns.hpp
 )
 
 target_link_libraries(
