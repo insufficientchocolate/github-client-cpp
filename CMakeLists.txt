@@ -73,6 +73,12 @@ add_subdirectory(tests)
 include(GNUInstallDirs)
 
 install(TARGETS "${PROJECT_NAME}"
-  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+
+# install public headers
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+
 
 add_subdirectory(integration_tests)
