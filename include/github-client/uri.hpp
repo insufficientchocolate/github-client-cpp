@@ -14,6 +14,7 @@ class URI {
   std::string getPath() const;
   std::string getScheme() const;
   std::string str() const;
+  bool operator==(const URI& b) const;
 
  private:
   std::string host_;

@@ -18,6 +18,7 @@ class Client {
   static std::unique_ptr<Client> oauth(const std::string& oauthToken);
   Client(JsonHttpClient* client);
   Client(AsioBasedClientFactory factory);
+  ~Client();
   std::vector<Follower> listFollowers();
   std::vector<Follower> listFollowers(const std::string& username);
 

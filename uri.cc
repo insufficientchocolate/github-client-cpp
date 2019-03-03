@@ -55,7 +55,7 @@ URI operator/(URI& parent, const boost::string_view& path) {
   }
   URI child = parent;
   std::stringstream ss;
-  ss << parent.path_ << "/" << path;
+  ss << parent.path_ << (parent.path_.empty() ? "" : "/") << path;
   child.path_ = ss.str();
   return child;
 }
@@ -70,6 +70,11 @@ std::string URI::str() const {
     ss << "/" << getPath();
   }
   return ss.str();
+}
+
+bool URI::operator==(const URI& b) const {
+  return getScheme() == b.getScheme() && getHost() == b.getHost() &&
+         getPort() == b.getPort() && getPath() == b.getPath();
 }
 
 };  // namespace GithubClient

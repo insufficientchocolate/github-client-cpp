@@ -51,11 +51,13 @@ Client::Client(JsonHttpClient* client)
 Client::Client(AsioBasedClientFactory factory)
     : impl_(boost::make_unique<Impl>(factory)) {}
 std::vector<Follower> Client::listFollowers() {
-  nlohmann::json response = impl_->get("/user/followers");
+  nlohmann::json response = impl_->get("user/followers");
   return response.get<std::vector<Follower>>();
 };
 std::vector<Follower> Client::listFollowers(const std::string& username) {
-  nlohmann::json response = impl_->get("/user");
+  nlohmann::json response = impl_->get("user/" + username + "/followers");
   return response.get<std::vector<Follower>>();
 }
+
+Client::~Client() = default;
 };  // namespace GithubClient

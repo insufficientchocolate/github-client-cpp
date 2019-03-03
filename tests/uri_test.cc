@@ -40,4 +40,9 @@ TEST(URI, ParsingURLWithoutPath) {
   }
 }
 
+TEST(URI, EqualOperator) {
+  GithubClient::URI uri("https://api.github.com");
+  ASSERT_TRUE(uri / "test" == GithubClient::URI("https://api.github.com/test"));
+}
+
 };  // namespace

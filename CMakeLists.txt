@@ -18,13 +18,14 @@ hunter_add_package(GTest)
 find_package(Boost CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+# added by GTest package
+find_package(GMock CONFIG REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 
 
 add_library(
-  "${CMAKE_PROJECT_NAME}"
-  include/github-client/client.hpp
+  "${CMAKE_PROJECT_NAME}" include/github-client/client.hpp
   include/github-client/json_http_client.hpp
   include/github-client/uri.hpp
   include/github-client/errors/illegal_uri_exception.hpp
