@@ -22,10 +22,11 @@ struct Client::Impl {
       : base_(kAPIBase), pool_(boost::make_unique<AsioThreadPool>()) {
     client_ = factory(pool_->getService());
   };
-  nlohmann::json get(const std::string& path) {
+  JsonResponse::Pointer get(const std::string& path) {
     return client_->get(base_ / path);
   }
-  nlohmann::json post(const std::string& path, const nlohmann::json body) {
+  JsonResponse::Pointer post(const std::string& path,
+                             const nlohmann::json body) {
     return client_->post(base_ / path, body);
   }
   std::unique_ptr<JsonHttpClient> client_;
@@ -51,12 +52,13 @@ Client::Client(JsonHttpClient* client)
 Client::Client(AsioBasedClientFactory factory)
     : impl_(boost::make_unique<Impl>(factory)) {}
 std::vector<Follower> Client::listFollowers() {
-  nlohmann::json response = impl_->get("user/followers");
-  return response.get<std::vector<Follower>>();
+  JsonResponse::Pointer response = impl_->get("user/followers");
+  return response->getJson().get<std::vector<Follower>>();
 };
 std::vector<Follower> Client::listFollowers(const std::string& username) {
-  nlohmann::json response = impl_->get("user/" + username + "/followers");
-  return response.get<std::vector<Follower>>();
+  JsonResponse::Pointer response =
+      impl_->get("user/" + username + "/followers");
+  return response->getJson().get<std::vector<Follower>>();
 }
 
 Client::~Client() = default;

@@ -5,6 +5,7 @@
 #include "cert.hpp"
 #include "connection.hpp"
 #include "http_client.hpp"
+#include "simple_json_response.hpp"
 
 namespace GithubClient {
 static const auto kSSLMethod = ssl::context::method::tlsv12_client;
@@ -14,19 +15,26 @@ HttpClient::HttpClient(boost::asio::io_context& io)
   loadRootCertificates(sslContext_);
 }
 
-nlohmann::json HttpClient::get(const URI& uri, const Headers& headers) {
+inline static JsonResponse::Pointer toJsonResponse(const Response& response) {
+  return std::make_shared<SimpleJsonResponse>(
+      response.result_int(), Headers{}, nlohmann::json::parse(response.body()));
+}
+
+JsonResponse::Pointer HttpClient::get(const URI& uri, const Headers& headers) {
   Connection connection(io_, sslContext_, uri.getHost(), uri.getPort());
   Request request = newRequest(http::verb::get, uri, "", headers);
   Response response = connection.doRequest(request);
-  return nlohmann::json::parse(response.body());
+  return toJsonResponse(response);
 }
 
-nlohmann::json HttpClient::post(const URI& uri, const nlohmann::json& body,
-                                const Headers& headers) {
+JsonResponse::Pointer HttpClient::post(const URI& uri,
+                                       const nlohmann::json& body,
+                                       const Headers& headers) {
   Connection connection(io_, sslContext_, uri.getHost(), uri.getPort());
   Request request = newRequest(http::verb::post, uri, body.dump(), headers);
   Response response = connection.doRequest(request);
-  return nlohmann::json::parse(response.body());
+  // return nlohmann::json::parse(response.body());
+  return toJsonResponse(response);
 }
 
 Request HttpClient::newRequest(http::verb const method, const URI& uri,

@@ -17,10 +17,11 @@ typedef http::response<http::string_body> Response;
 class HttpClient : public JsonHttpClient {
  public:
   HttpClient(boost::asio::io_context& io);
-  virtual nlohmann::json get(const URI& uri,
-                             const Headers& headers = Headers()) override;
-  virtual nlohmann::json post(const URI& uri, const nlohmann::json& body,
-                              const Headers& headers = Headers()) override;
+  virtual JsonResponse::Pointer get(
+      const URI& uri, const Headers& headers = Headers()) override;
+  virtual JsonResponse::Pointer post(
+      const URI& uri, const nlohmann::json& body,
+      const Headers& headers = Headers()) override;
 
  private:
   Request newRequest(http::verb const method, const URI& uri,

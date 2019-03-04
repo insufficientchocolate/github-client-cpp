@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <github-client/client.hpp>
 #include "mock/json_http_client.mock.hpp"
+#include "simple_json_response.hpp"
 using GithubClient::Test::MockJsonHttpClient;
 
 using ::testing::_;
@@ -59,7 +60,9 @@ TEST(Client, querySelfFollower) {
   GithubClient::Client client(mockHttp);
   EXPECT_CALL(*mockHttp, get(URI("https://api.github.com/user/followers"), _))
       .Times(1)
-      .WillOnce(Return(nlohmann::json::parse(followerResponse)));
+      .WillOnce(Return(std::make_shared<GithubClient::SimpleJsonResponse>(
+          200, GithubClient::Headers{},
+          nlohmann::json::parse(followerResponse))));
   std::vector<Follower> followers = client.listFollowers();
   // check result
   std::vector<std::string> names;

@@ -30,6 +30,8 @@ add_library(
   include/github-client/uri.hpp
   include/github-client/errors/illegal_uri_exception.hpp
   include/github-client/follower.hpp
+  include/github-client/headers.hpp
+  include/github-client/json_response.hpp
   errors/illegal_uri_exception.cc
   client.cc
   http_client.hpp
@@ -45,6 +47,8 @@ add_library(
   asio_thread_pool.cc
   asio_thread_pool.hpp
   follower_ns.hpp
+  simple_json_response.hpp
+  simple_json_response.cc
 )
 
 target_link_libraries(
@@ -81,4 +85,3 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
 
-add_subdirectory(integration_tests)
