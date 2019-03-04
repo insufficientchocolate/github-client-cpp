@@ -36,7 +36,7 @@ matrix:
       env: TOOLCHAIN=clang-5 CONFIG=Release 
     - os: osx
       osx_image: xcode9.4
-      env: TOOLCHAIN=osx-10-9 CONFIG=Release VERBOSE=0
+      env: TOOLCHAIN=osx-10-9 CONFIG=Release EXTRA_POLLY_ARGS="--output_filter xcpretty"
 
 install:
   # Info about OS
@@ -56,8 +56,9 @@ install:
   # fix broken clang link on Travis-CI
   - if [[ "`uname`" == "Linux" ]]; then  mkdir clang-bin; ln -s /usr/local/clang-5.0.0/bin/clang++ clang-bin/clang++-5.0; fi
   - if [[ "`uname`" == "Darwin" ]]; then mkdir clang-bin; ln -s /usr/bin/clang++ clang-bin/clang++-5.0; fi
+  - if [[ "`uname`" == "Darwin" ]]; then gem install xcpretty; fi
   # Download polly
-  - wget --quiet https://github.com/ruslo/polly/archive/master.zip
+  - wget --quiet https://github.com/insufficientchocolate/polly/archive/master.zip
   - unzip -q master.zip
   # Install dependencies (CMake, Android NDK)
   - POLLY_SOURCE_DIR="`pwd`/polly-master"
@@ -81,6 +82,7 @@ script:
     --install
     --clear
     --test
+    ${EXTRA_POLLY_ARGS}
 
 cache:
   directories:
