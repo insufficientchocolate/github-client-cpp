@@ -6,6 +6,7 @@ include(HunterGate)
 HunterGate(
   URL "https://github.com/ruslo/hunter/archive/v0.23.89.tar.gz"
   SHA1 "a370290a8b32987755a36d64807bf8c7f5b61730"
+  LOCAL
 )
 
 project(github-client-cpp)
@@ -84,4 +85,5 @@ install(TARGETS "${PROJECT_NAME}"
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
+add_subdirectory(cmd)
 
