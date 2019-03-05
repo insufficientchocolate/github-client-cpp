@@ -28,12 +28,6 @@ dist:
 
 matrix:
   include:
-    - os: linux
-      env: TOOLCHAIN=gcc-5 CONFIG=Release
-    - os: linux
-      env: TOOLCHAIN=gcc-7 CONFIG=Release
-    - os: linux
-      env: TOOLCHAIN=clang-5 CONFIG=Release 
     - os: osx
       osx_image: xcode9.4
       env: TOOLCHAIN=osx-10-9 CONFIG=Release
