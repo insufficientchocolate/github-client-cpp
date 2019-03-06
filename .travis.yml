@@ -75,6 +75,7 @@ script:
     --install
     --clear
     --test
+    --verbosity silent
     --tail 200
 
 cache:
