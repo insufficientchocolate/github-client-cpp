@@ -76,7 +76,6 @@ script:
     --clear
     --test
     --tail 200
-    --discard 10
 
 cache:
   directories:
