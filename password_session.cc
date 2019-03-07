@@ -19,7 +19,8 @@ JsonResponse::Pointer PasswordSession::post(const URI& uri,
 };
 
 Headers PasswordSession::withAuth(Headers headers) const {
-  headers["Authorization"] = Base64::encode(username_ + ":" + password_);
+  headers["Authorization"] =
+      "Basic " + Base64::encode(username_ + ":" + password_);
   return headers;
 }
 
