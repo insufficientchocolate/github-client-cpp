@@ -11,9 +11,15 @@ static std::unique_ptr<GithubClient::Client> askLogin() {
 }
 
 FollowerCommand::FollowerCommand(CLI::App* app) {
-  app->callback([]{
+  app->add_option("username",username_,"optional username");
+  app->callback([this]{
 	auto client = askLogin();
-	std::vector<GithubClient::Follower> followers = client->listFollowers();
+	std::vector<GithubClient::Follower> followers;
+	if (username_.empty()) {
+	 followers = client->listFollowers();
+	} else {
+	  followers = client->listFollowers(username_);
+	  }
 	size_t count = followers.size();
 	if (count <= 0) {
 	  std::cout << "Currently, you have no follower." << std::endl;
