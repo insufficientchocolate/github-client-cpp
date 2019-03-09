@@ -58,7 +58,7 @@ install:
   - if [[ "`uname`" == "Darwin" ]]; then mkdir clang-bin; ln -s /usr/bin/clang++ clang-bin/clang++-5.0; fi
   - if [[ "`uname`" == "Darwin" ]]; then gem install xcpretty; fi
   # Download polly
-  - wget --quiet https://github.com/insufficientchocolate/polly/archive/master.zip
+  - wget --quiet https://github.com/ruslo/polly/archive/master.zip
   - unzip -q master.zip
   # Install dependencies (CMake, Android NDK)
   - POLLY_SOURCE_DIR="`pwd`/polly-master"
